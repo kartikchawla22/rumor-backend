@@ -5,6 +5,9 @@ const { PEXELS_API_KEY, UNSPLASH_API_KEY } = process.env;
 
 exports.getImages = async (req, res) => {
     const { page, query } = req.query
+    if (!page || !query) {
+        response({ res, error: "Please provide page and query" });
+    }
     try {
         const images = await getAllImages(page, query)
         console.log(page, query);
