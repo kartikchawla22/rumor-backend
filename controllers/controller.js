@@ -10,7 +10,6 @@ exports.getImages = async (req, res) => {
     }
     try {
         const images = await getAllImages(page, query)
-        console.log(page, query);
         const pexelImages = images[0].data.photos.map((photo) => {
             return {
                 imageURL: photo.src.original,
@@ -35,9 +34,6 @@ exports.getImages = async (req, res) => {
                 }
             }
         })
-        console.log("here");
-
-
         const imagesMap = pexelImages.concat(unsplashImages)
         return response({ res, data: imagesMap.length > 0 ? imagesMap : null });
     } catch (error) {
